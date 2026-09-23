@@ -1,0 +1,5 @@
+# Los reportes contienen información del sistema
+reports/*
+!reports/.gitkeep
+*.swp
+*~
