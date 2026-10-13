@@ -66,6 +66,9 @@ report_summary() {
         echo "  MEDIO:   $COUNT_WARN"
         echo "  CRÍTICO: $COUNT_CRIT"
         echo ""
-        echo "Nivel de riesgo del sistema: $nivel"
+        local color_nivel="$GREEN"
+        [[ "$nivel" == "MEDIO" ]] && color_nivel="$YELLOW"
+        [[ "$nivel" == "ALTO" ]] && color_nivel="$RED"
+        printf '%sNivel de riesgo del sistema: %s%s\n' "$color_nivel" "$nivel" "$NC"
     } | tee -a "$REPORT_FILE"
 }
