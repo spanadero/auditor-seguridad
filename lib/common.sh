@@ -52,10 +52,20 @@ report_header() {
 report_summary() {
     section "RESUMEN"
     local total=$((COUNT_OK + COUNT_WARN + COUNT_CRIT))
+    local nivel="BAJO"
+
+    if [[ $COUNT_CRIT -gt 0 ]]; then
+        nivel="ALTO"
+    elif [[ $COUNT_WARN -gt 0 ]]; then
+        nivel="MEDIO"
+    fi
+
     {
         echo "Total de verificaciones: $total"
         echo "  OK:      $COUNT_OK"
         echo "  MEDIO:   $COUNT_WARN"
         echo "  CRÍTICO: $COUNT_CRIT"
+        echo ""
+        echo "Nivel de riesgo del sistema: $nivel"
     } | tee -a "$REPORT_FILE"
 }
